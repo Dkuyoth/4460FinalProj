@@ -5,12 +5,14 @@ from .models import Team, Employee, Athlete, Equipment, Event, Income
 class TeamForm(forms.ModelForm):
     class Meta:
         model = Team
-        fields = ['name', 'sport_type']
+        fields = ['name', 'sport_type', 'established_date']
+
 
 class EmployeeForm(forms.ModelForm):
     class Meta:
         model = Employee
-        fields = ['name', 'salary', 'team']
+        fields = ['employee_name', 'position', 'start_date', 'end_date', 'salary', 'team']
+
 
 class AthleteForm(forms.ModelForm):
     class Meta:
@@ -30,5 +32,10 @@ class EventForm(forms.ModelForm):
 class IncomeForm(forms.ModelForm):
     class Meta:
         model = Income
-        fields = ['type', 'amount', 'date', 'team']        
+        fields = ['type', 'amount', 'date', 'team']    
+
+class RankForm(forms.ModelForm):
+    class Meta:
+        model = Rank
+        fields = ['team', 'rank', 'record']    
 

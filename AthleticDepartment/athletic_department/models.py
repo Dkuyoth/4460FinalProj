@@ -3,16 +3,21 @@ from django.db import models
 class Team(models.Model):
     name = models.CharField(max_length=100)
     sport_type = models.CharField(max_length=100)
+    established_date = models.DateField()
+
     # Add other fields as necessary
 
 class Employee(models.Model):
-    name = models.CharField(max_length=100)
+    employee_name = models.CharField(max_length=100)
+    position = models.CharField(max_length=100)
+    start_date = models.DateField()
+    end_date = models.DateField(null=True, blank=True)
     salary = models.DecimalField(max_digits=10, decimal_places=2)
     team = models.ForeignKey(Team, on_delete=models.CASCADE)
     # Add other fields as necessary
 
 class Athlete(models.Model):
-    name = models.CharField(max_length=100)
+    athlete_name = models.CharField(max_length=100)
     scholarship_amount = models.DecimalField(max_digits=10, decimal_places=2)
     team = models.ForeignKey(Team, on_delete=models.CASCADE)
     # Add other fields as necessary
@@ -41,11 +46,15 @@ class Income(models.Model):
         # Add more income types as needed
     ]
 
-    type = models.CharField(max_length=50, choices=TYPE_CHOICES)
+    income_type = models.CharField(max_length=50, choices=TYPE_CHOICES)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     date = models.DateField()
     team = models.ForeignKey('Team', on_delete=models.CASCADE)
 
-    def __str__(self):
-        return f"{self.get_type_display()} - {self.amount}"
+
+class Rank(models.Model):
+    team = models.ForeignKey(Team, on_delete=models.CASCADE)
+    rank = models.IntegerField()
+    record = models.IntegerField()
+    
 # Remember to run migrations after defining your models
