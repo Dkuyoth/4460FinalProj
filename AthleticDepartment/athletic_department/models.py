@@ -31,4 +31,6 @@ class Event(models.Model):
     team = models.ForeignKey(Team, on_delete=models.CASCADE)
     # Add other fields as necessary
 
+#income and rankings schoolarship from erd
+
 # Remember to run migrations after defining your models
