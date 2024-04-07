@@ -31,6 +31,21 @@ class Event(models.Model):
     team = models.ForeignKey(Team, on_delete=models.CASCADE)
     # Add other fields as necessary
 
-#income and rankings schoolarship from erd
+class Income(models.Model):
+    TYPE_CHOICES = [
+        ('donation', 'Donation'),
+        ('state', 'State Funding'),
+        ('university', 'University Funding'),
+        ('tv_network', 'TV Network Payout'),
+        ('event_payout', 'Event Payout'),
+        # Add more income types as needed
+    ]
 
+    type = models.CharField(max_length=50, choices=TYPE_CHOICES)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    date = models.DateField()
+    team = models.ForeignKey('Team', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.get_type_display()} - {self.amount}"
 # Remember to run migrations after defining your models
