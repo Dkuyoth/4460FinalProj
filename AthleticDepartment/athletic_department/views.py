@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from .models import Team
+from .models import Team, Employee, Athlete, Equipment, Event, Income
+
 
 def team_list(request):
     teams = Team.objects.all()
